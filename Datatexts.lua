@@ -129,17 +129,23 @@ app:RegisterEvent("ADDON_LOADED", "Datatexts", function(addon)
     app:UnregisterEvent("ADDON_LOADED", "Datatexts");
 end);
 
-app.lastUpdate = -1;
+app.lastTimeUpdate = -1;
+app.lastSystemStatUpdate = -1;
 
 local UPDATE_THRESHOLD = 10;
 
 app:RegisterUpdate("Datatexts", function()
     local time = GetTime();
 
-    if time - app.lastUpdate > UPDATE_THRESHOLD then
-        app.lastUpdate = time;
+    if time - app.lastTimeUpdate > UPDATE_THRESHOLD then
+        app.lastTimeUpdate = time;
 
         app.Time.OnUpdate();
+    end
+
+    if time - app.lastSystemStatUpdate > app.Settings:Get("SystemStats", "fpsRefresh") then
+        app.lastSystemStatUpdate = time;
+
         app.SystemStats.OnUpdate();
     end
 end)
