@@ -113,7 +113,7 @@ app:RegisterEvent("ADDON_LOADED", "Datatexts", function(addon)
     app.Frame:SetSize(400, 260);
     app.Frame:Show();
 
-    app.Frame:SetPoint("CENTER", UIParent, "TOPLEFT", 130, -60);
+    app.Frame:SetPoint("CENTER", UIParent, "TOPLEFT", 180, -60);
     -- TODO: Set its position
 
     app.Version = C_AddOns.GetAddOnMetadata(app:GetName(), "Version");
