@@ -105,10 +105,31 @@ app:RegisterEvent("ADDON_LOADED", "Datatexts", function(addon)
         return;
     end
 
+    app.Frame = CreateFrame("Frame", "Datatexts-Frame", UIParent);
+    app.Frame:SetPoint("CENTER", UIParent, "CENTER", 0, 0);
+    app.Frame:SetSize(400, 260);
+    app.Frame:Show();
+
+    -- TODO: Set its position
+
     app.Version = C_AddOns.GetAddOnMetadata(app:GetName(), "Version");
     app.Settings:Initialize();
 
-    app:log(L["MESSAGE_DEBUG_GREETING"]);
+    app.Time.Initialize();
 
     app:UnregisterEvent("ADDON_LOADED", "Datatexts");
 end);
+
+app.lastUpdate = -1;
+
+local UPDATE_THRESHOLD = 10;
+
+app:RegisterUpdate("Datatexts", function()
+    local time = GetTime();
+
+    if time - app.lastUpdate > UPDATE_THRESHOLD then
+        app.lastUpdate = time;
+
+        app.Time.OnUpdate();
+    end
+end)

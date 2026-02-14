@@ -30,6 +30,10 @@ settings.Open = function(self)
 end
 
 local SettingsBase = {
+    ["Time"] = {
+        ["twentyFourHour"] = true,
+        ["localTime"] = true,
+    },
     -- TODO: Setup base data structure
 };
 local OnClickForTab = function(self)
