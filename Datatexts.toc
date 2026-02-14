@@ -15,4 +15,5 @@ modules/systemstats.lua
 modules/durability.lua
 modules/lootspec.lua
 modules/warmode.lua
+modules/combat.lua
 Datatexts.lua
