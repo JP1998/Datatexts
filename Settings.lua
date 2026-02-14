@@ -85,6 +85,10 @@ settingsFrame.AddObject = function(self, obj)
     table.insert(self.objects, obj);
 end
 settingsFrame.Refresh = function(self)
+    if not self.objects then
+        return;
+    end
+
     for i,obj in ipairs(self.objects) do
         if obj.OnRefresh then
             obj:OnRefresh();
