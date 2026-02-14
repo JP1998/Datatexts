@@ -123,6 +123,7 @@ app:RegisterEvent("ADDON_LOADED", "Datatexts", function(addon)
     app.SystemStats.Initialize();
     app.Durability.Initialize();
     app.LootSpec.Initialize();
+    app.WarMode.Initialize();
 
     app:UnregisterEvent("ADDON_LOADED", "Datatexts");
 end);

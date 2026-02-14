@@ -14,4 +14,5 @@ modules/time.lua
 modules/systemstats.lua
 modules/durability.lua
 modules/lootspec.lua
+modules/warmode.lua
 Datatexts.lua
