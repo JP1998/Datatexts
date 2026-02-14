@@ -7,9 +7,10 @@ app.SystemStats = {};
 app.SystemStats.Initialize = function()
     app.SystemStats.Frame = app.Frame:CreateFontString("Datatexts-SystemStats");
     app.SystemStats.Frame:SetPoint("CENTER", app.Time.Frame, "BOTTOM", 0, -4);
-    app.SystemStats.Frame:SetFont("Fonts/FRIZQT__.TTF", 14, "THICKOUTLINE");
+    app.SystemStats.Frame:SetFont("Fonts/FRIZQT__.TTF", 14, "OUTLINE");
     app.SystemStats.Frame:SetTextColor(1, 1, 1);
     app.SystemStats.Frame:SetShadowColor(0, 0, 0);
+    app.SystemStats.Frame:SetShadowOffset(1,-1);
     app.SystemStats.Frame:Show();
 
     app.SystemStats.fps = 0;

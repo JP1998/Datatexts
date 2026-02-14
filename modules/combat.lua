@@ -6,9 +6,10 @@ app.Combat = {};
 app.Combat.Initialize = function()
     app.Combat.Frame = app.Frame:CreateFontString("Datatexts-Combat");
     app.Combat.Frame:SetPoint("LEFT", app.Time.Frame, "TOP", 1, 8);
-    app.Combat.Frame:SetFont("Fonts/FRIZQT__.TTF", 14, "THICKOUTLINE");
+    app.Combat.Frame:SetFont("Fonts/FRIZQT__.TTF", 14, "OUTLINE");
     app.Combat.Frame:SetTextColor(1, 1, 1);
     app.Combat.Frame:SetShadowColor(0, 0, 0);
+    app.Combat.Frame:SetShadowOffset(1,-1);
     app.Combat.Frame:Show();
 
     app.Combat.inCombat = false;

@@ -75,9 +75,10 @@ app.LootSpec.IconLookup = { -- This table contains a LUT mapping **spec ID** (no
 app.LootSpec.Initialize = function()
     app.LootSpec.Frame = app.Frame:CreateFontString("Datatexts-LootSpec");
     app.LootSpec.Frame:SetPoint("LEFT", app.SystemStats.Frame, "RIGHT", 1, 0);
-    app.LootSpec.Frame:SetFont("Fonts/FRIZQT__.TTF", 14, "THICKOUTLINE");
+    app.LootSpec.Frame:SetFont("Fonts/FRIZQT__.TTF", 14, "OUTLINE");
     app.LootSpec.Frame:SetTextColor(1, 1, 1);
     app.LootSpec.Frame:SetShadowColor(0, 0, 0);
+    app.LootSpec.Frame:SetShadowOffset(1,-1);
     app.LootSpec.Frame:Show();
 
     app:RegisterEvent("LOADING_SCREEN_DISABLED", "Datatexts-LootSpec", app.LootSpec.OnUpdate);

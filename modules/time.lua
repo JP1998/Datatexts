@@ -7,9 +7,10 @@ app.Time = {};
 app.Time.Initialize = function()
     app.Time.Frame = app.Frame:CreateFontString("Datatexts-Time");
     app.Time.Frame:SetPoint("CENTER", app.Frame, "CENTER", 0, 0);
-    app.Time.Frame:SetFont("Fonts/FRIZQT__.TTF", 28, "THICKOUTLINE");
+    app.Time.Frame:SetFont("Fonts/FRIZQT__.TTF", 28, "OUTLINE");
     app.Time.Frame:SetTextColor(1, 1, 1);
     app.Time.Frame:SetShadowColor(0, 0, 0);
+    app.Time.Frame:SetShadowOffset(1,-1);
     app.Time.Frame:Show();
 
     app.Time.ampm = "";

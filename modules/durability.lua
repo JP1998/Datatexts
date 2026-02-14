@@ -7,9 +7,10 @@ app.Durability = {};
 app.Durability.Initialize = function()
     app.Durability.Frame = app.Frame:CreateFontString("Datatexts-Durability");
     app.Durability.Frame:SetPoint("RIGHT", app.SystemStats.Frame, "LEFT", -1, 0);
-    app.Durability.Frame:SetFont("Fonts/FRIZQT__.TTF", 14, "THICKOUTLINE");
+    app.Durability.Frame:SetFont("Fonts/FRIZQT__.TTF", 14, "OUTLINE");
     app.Durability.Frame:SetTextColor(1, 1, 1);
     app.Durability.Frame:SetShadowColor(0, 0, 0);
+    app.Durability.Frame:SetShadowOffset(1,-1);
     app.Durability.Frame:Show();
 
     app.Durability.total = 0;
