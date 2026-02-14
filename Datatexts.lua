@@ -120,6 +120,7 @@ app:RegisterEvent("ADDON_LOADED", "Datatexts", function(addon)
     app.Settings:Initialize();
 
     app.Time.Initialize();
+    app.SystemStats.Initialize();
 
     app:UnregisterEvent("ADDON_LOADED", "Datatexts");
 end);
@@ -135,5 +136,6 @@ app:RegisterUpdate("Datatexts", function()
         app.lastUpdate = time;
 
         app.Time.OnUpdate();
+        app.SystemStats.OnUpdate();
     end
 end)

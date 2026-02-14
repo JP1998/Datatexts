@@ -34,6 +34,11 @@ local SettingsBase = {
         ["twentyFourHour"] = true,
         ["localTime"] = true,
     },
+    ["SystemStats"] = {
+        ["worldMS"] = false,
+        ["combo"] = true,
+        ["fpsRefresh"] = 2,
+    },
     -- TODO: Setup base data structure
 };
 local OnClickForTab = function(self)

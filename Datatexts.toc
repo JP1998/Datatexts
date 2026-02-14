@@ -11,4 +11,5 @@ locales/enGB.lua
 locales/deDE.lua
 Settings.lua
 modules/time.lua
+modules/systemstats.lua
 Datatexts.lua
