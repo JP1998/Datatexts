@@ -110,7 +110,7 @@ app:RegisterEvent("ADDON_LOADED", "Datatexts", function(addon)
     end
 
     app.Frame = CreateFrame("Frame", "Datatexts-Frame", UIParent);
-    app.Frame:SetSize(400, 260);
+    app.Frame:SetSize(250, 60);
     app.Frame:Show();
 
     app.Frame:SetPoint("CENTER", UIParent, "TOPLEFT", 180, -60);
