@@ -4,11 +4,6 @@ local L = app.L;
 
 app.Time = {};
 
-app.Time.colorString = function(str)
-    return GetClassColoredTextForUnit("player", str)
-end
-
-
 app.Time.Initialize = function()
     app.Time.Frame = app.Frame:CreateFontString("Datatexts-Time");
     app.Time.Frame:SetPoint("CENTER", app.Frame, "CENTER", 0, 0);

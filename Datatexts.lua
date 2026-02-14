@@ -100,6 +100,10 @@ app.stringEscape = function(str)
     return string.gsub(string.format("%q", str), "\n", "n");
 end
 
+app.colorString = function(str)
+    return GetClassColoredTextForUnit("player", str)
+end
+
 app:RegisterEvent("ADDON_LOADED", "Datatexts", function(addon)
     if addon ~= app:GetName() then
         return;
