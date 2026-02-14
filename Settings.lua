@@ -53,11 +53,11 @@ end;
 settings.Initialize = function(self)
     PanelTemplates_SetNumTabs(self.Frame, #self.Frame.Tabs);
 
-    if not GratzieWitchSettings then
-        GratzieWitchSettings = CopyTable(SettingsBase);
+    if not DatatextsSettings then
+        DatatextsSettings = CopyTable(SettingsBase);
     end
 
-    settings.Data = GratzieWitchSettings;
+    settings.Data = DatatextsSettings;
 
     self.Frame:Refresh();
 
@@ -65,15 +65,15 @@ settings.Initialize = function(self)
 end
 settings.Get = function(self, category, option)
     if category == nil then
-        return GratzieWitchSettings;
+        return DatatextsSettings;
     elseif option == nil then
-        return GratzieWitchSettings and GratzieWitchSettings[category];
+        return DatatextsSettings and DatatextsSettings[category];
     else
-        return GratzieWitchSettings and GratzieWitchSettings[category][option];
+        return DatatextsSettings and DatatextsSettings[category][option];
     end
 end
 settings.Set = function(self, category, option, value)
-    GratzieWitchSettings[category][option] = value;
+    DatatextsSettings[category][option] = value;
 
     self.Frame:Refresh();
 end

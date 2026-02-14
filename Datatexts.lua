@@ -100,7 +100,7 @@ app.stringEscape = function(str)
     return string.gsub(string.format("%q", str), "\n", "n");
 end
 
-app:RegisterEvent("ADDON_LOADED", "GratzieWitch", function(addon)
+app:RegisterEvent("ADDON_LOADED", "Datatexts", function(addon)
     if addon ~= app:GetName() then
         return;
     end
@@ -110,5 +110,5 @@ app:RegisterEvent("ADDON_LOADED", "GratzieWitch", function(addon)
 
     app:log(L["MESSAGE_DEBUG_GREETING"]);
 
-    app:UnregisterEvent("ADDON_LOADED", "GratzieWitch");
+    app:UnregisterEvent("ADDON_LOADED", "Datatexts");
 end);
