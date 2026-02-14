@@ -13,6 +13,11 @@ app.Durability.Initialize = function()
     app.Durability.Frame:Show();
 
     app.Durability.total = 0;
+
+    app:RegisterEvent("PLAYER_DEAD", "Datatexts-Durability", app.Durability.OnUpdate);
+    app:RegisterEvent("UPDATE_INVENTORY_DURABILITY", "Datatexts-Durability", app.Durability.OnUpdate);
+    app:RegisterEvent("LOADING_SCREEN_DISABLED", "Datatexts-Durability", app.Durability.OnUpdate);
+    app:RegisterEvent("PLAYER_EQUIPMENT_CHANGED", "Datatexts-Durability", app.Durability.OnUpdate);
 end
 
 app.Durability.OnUpdate = function()
@@ -32,8 +37,3 @@ app.Durability.OnUpdate = function()
 
     app.Durability.Frame:SetText(("|TInterface/ICONS/Trade_BlackSmithing:0|t %s"):format(app.colorString(app.Durability.total.."%")));
 end
-
-app:RegisterEvent("PLAYER_DEAD", "Datatexts-Durability", app.Durability.OnUpdate);
-app:RegisterEvent("UPDATE_INVENTORY_DURABILITY", "Datatexts-Durability", app.Durability.OnUpdate);
-app:RegisterEvent("LOADING_SCREEN_DISABLED", "Datatexts-Durability", app.Durability.OnUpdate);
-app:RegisterEvent("PLAYER_EQUIPMENT_CHANGED", "Datatexts-Durability", app.Durability.OnUpdate);
