@@ -1,0 +1,13 @@
+## Author: Luckywolf-Stormrage (https://www.github.com/JP1998)
+## Interface: 120000
+## Title: Datatexts
+## SavedVariables: DatatextsSettings
+## Notes: All your important data on display.
+## Version: @project-version@
+## X-Wago-ID: TBD
+src/base.lua
+locales/enUS.lua
+locales/enGB.lua
+locales/deDE.lua
+Settings.lua
+Datatexts.lua
