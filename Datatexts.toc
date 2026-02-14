@@ -12,4 +12,5 @@ locales/deDE.lua
 Settings.lua
 modules/time.lua
 modules/systemstats.lua
+modules/durability.lua
 Datatexts.lua

@@ -121,6 +121,7 @@ app:RegisterEvent("ADDON_LOADED", "Datatexts", function(addon)
 
     app.Time.Initialize();
     app.SystemStats.Initialize();
+    app.Durability.Initialize();
 
     app:UnregisterEvent("ADDON_LOADED", "Datatexts");
 end);
