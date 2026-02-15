@@ -104,6 +104,10 @@ app.colorString = function(str)
     return GetClassColoredTextForUnit("player", str)
 end
 
+app.UpdateFramePosition = function(self)
+    app.Frame:SetPoint("TOPLEFT", UIParent, "TOPLEFT", app.Settings:Get("General", "offsetX"), -app.Settings:Get("General", "offsetY"));
+end
+
 app:RegisterEvent("ADDON_LOADED", "Datatexts", function(addon)
     if addon ~= app:GetName() then
         return;
@@ -113,11 +117,10 @@ app:RegisterEvent("ADDON_LOADED", "Datatexts", function(addon)
     app.Frame:SetSize(250, 60);
     app.Frame:Show();
 
-    app.Frame:SetPoint("CENTER", UIParent, "TOPLEFT", 180, -60);
-    -- TODO: Set its position
-
     app.Version = C_AddOns.GetAddOnMetadata(app:GetName(), "Version");
     app.Settings:Initialize();
+
+    app:UpdateFramePosition();
 
     app.Time.Initialize();
     app.SystemStats.Initialize();

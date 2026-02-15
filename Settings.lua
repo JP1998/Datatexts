@@ -39,7 +39,11 @@ local SettingsBase = {
         ["combo"] = true,
         ["fpsRefresh"] = 2,
     },
-    -- TODO: Setup base data structure
+    ["General"] = {
+        ["anchor"] = "TOPLEFT",
+        ["offsetX"] = 60,
+        ["offsetY"] = -20,
+    },
 };
 local OnClickForTab = function(self)
     local id = self:GetID();
@@ -67,6 +71,9 @@ settings.Initialize = function(self)
     end
 
     settings.Data = DatatextsSettings;
+
+    app.Settings.PositionSettings.XSlider:SetValue(DatatextsSettings["General"]["offsetX"]);
+    app.Settings.PositionSettings.YSlider:SetValue(DatatextsSettings["General"]["offsetY"]);
 
     self.Frame:Refresh();
 
@@ -171,3 +178,70 @@ f:SetText("v" .. C_AddOns.GetAddOnMetadata(app:GetName(), "Version"));
 f:Show();
 settingsFrame.version = f;
 
+
+app.Settings.PositionSettings = {};
+
+
+local PositionSettings_XSlider = CreateFrame("Slider", "Datatexts-Settings-PositionSettings_XSlider", settingsFrame, "MinimalSliderTemplate");
+
+PositionSettings_XSlider:SetPoint("TOPLEFT", settingsFrame.title, "BOTTOMLEFT", 48, -24);
+PositionSettings_XSlider:SetPoint("RIGHT", settingsFrame, "RIGHT", -12, 0);
+PositionSettings_XSlider:SetHeight(17);
+PositionSettings_XSlider:SetMinMaxValues(-1000, 1000);
+PositionSettings_XSlider:SetValueStep(1);
+PositionSettings_XSlider:SetObeyStepOnDrag(true);
+
+local PositionSettings_XSlider_Label = settingsFrame:CreateFontString(nil, "ARTWORK", "GameFontWhite");
+PositionSettings_XSlider_Label:SetPoint("RIGHT", PositionSettings_XSlider, "LEFT", -2, 0);
+PositionSettings_XSlider_Label:SetJustifyH("LEFT");
+PositionSettings_XSlider_Label:SetText("X Offset");
+PositionSettings_XSlider_Label:Show();
+
+local PositionSettings_XSlider_ValueLabel = settingsFrame:CreateFontString(nil, "ARTWORK", "GameFontWhite");
+PositionSettings_XSlider_ValueLabel:SetPoint("TOPLEFT", PositionSettings_XSlider, "BOTTOMLEFT", 0, 0);
+PositionSettings_XSlider_ValueLabel:SetJustifyH("LEFT");
+PositionSettings_XSlider_ValueLabel:SetText("50");
+PositionSettings_XSlider_ValueLabel:Show();
+
+PositionSettings_XSlider:SetScript("OnValueChanged", function(self, value, userInput)
+    PositionSettings_XSlider_ValueLabel:SetText("" .. value);
+
+    if userInput then
+        app.Settings:Set("General", "offsetX", value);
+        app:UpdateFramePosition();
+    end
+end)
+
+app.Settings.PositionSettings.XSlider = PositionSettings_XSlider;
+
+local PositionSettings_YSlider = CreateFrame("Slider", "Datatexts-Settings-PositionSettings_YSlider", settingsFrame, "MinimalSliderTemplate");
+
+PositionSettings_YSlider:SetPoint("TOPLEFT", PositionSettings_XSlider, "BOTTOMLEFT", 0, -24);
+PositionSettings_YSlider:SetPoint("RIGHT", settingsFrame, "RIGHT", -12, 0);
+PositionSettings_YSlider:SetHeight(17);
+PositionSettings_YSlider:SetMinMaxValues(-1000, 1000);
+PositionSettings_YSlider:SetValueStep(1);
+PositionSettings_YSlider:SetObeyStepOnDrag(true);
+
+local PositionSettings_YSlider_Label = settingsFrame:CreateFontString(nil, "ARTWORK", "GameFontWhite");
+PositionSettings_YSlider_Label:SetPoint("RIGHT", PositionSettings_YSlider, "LEFT", -2, 0);
+PositionSettings_YSlider_Label:SetJustifyH("LEFT");
+PositionSettings_YSlider_Label:SetText("Y Offset");
+PositionSettings_YSlider_Label:Show();
+
+local PositionSettings_YSlider_ValueLabel = settingsFrame:CreateFontString(nil, "ARTWORK", "GameFontWhite");
+PositionSettings_YSlider_ValueLabel:SetPoint("TOPLEFT", PositionSettings_YSlider, "BOTTOMLEFT", 0, 0);
+PositionSettings_YSlider_ValueLabel:SetJustifyH("LEFT");
+PositionSettings_YSlider_ValueLabel:SetText("50");
+PositionSettings_YSlider_ValueLabel:Show();
+
+PositionSettings_YSlider:SetScript("OnValueChanged", function(self, value, userInput)
+    PositionSettings_YSlider_ValueLabel:SetText("" .. value);
+
+    if userInput then
+        app.Settings:Set("General", "offsetY", value);
+        app:UpdateFramePosition();
+    end
+end)
+
+app.Settings.PositionSettings.YSlider = PositionSettings_YSlider;
