@@ -107,6 +107,7 @@ end
 app.UpdateFramePosition = function(self)
     local settings = app.Settings:Get("General");
 
+    app.Frame:ClearAllPoints()
     app.Frame:SetPoint(settings.anchor, UIParent, settings.anchor, settings.offsetX, -settings.offsetY);
 end
 
