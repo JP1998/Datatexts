@@ -19,7 +19,6 @@ local mainCategory = Settings.RegisterCanvasLayoutCategory(settingsFrame, settin
 mainCategory.ID = settingsFrame.name;
 Settings.RegisterAddOnCategory(mainCategory);
 
-
 settings.Open = function(self)
     -- Open the Options menu.
     if not SettingsPanel:IsVisible() then
@@ -74,6 +73,8 @@ settings.Initialize = function(self)
 
     app.Settings.PositionSettings.XSlider:SetValue(DatatextsSettings["General"]["offsetX"]);
     app.Settings.PositionSettings.YSlider:SetValue(DatatextsSettings["General"]["offsetY"]);
+
+    app.Settings.PositionSettings.Alignment["RadioButton_" .. DatatextsSettings["General"]["anchor"]]:SetChecked(true);
 
     self.Frame:Refresh();
 
@@ -245,3 +246,50 @@ PositionSettings_YSlider:SetScript("OnValueChanged", function(self, value, userI
 end)
 
 app.Settings.PositionSettings.YSlider = PositionSettings_YSlider;
+
+app.Settings.PositionSettings.Alignment = {};
+
+local PositionSettings_Alignment_Caption = settingsFrame:CreateFontString("PositionSettings_Alignment_Caption", "ARTWORK", "GameFontWhite");
+PositionSettings_Alignment_Caption:SetPoint("TOP", PositionSettings_YSlider, "BOTTOM", 0, -24);
+PositionSettings_Alignment_Caption:SetPoint("LEFT", settingsFrame, "LEFT", 0, 0);
+PositionSettings_Alignment_Caption:SetPoint("RIGHT", settingsFrame, "RIGHT", 0, 0);
+PositionSettings_Alignment_Caption:SetJustifyH("CENTER");
+PositionSettings_Alignment_Caption:SetText("Alignment");
+PositionSettings_Alignment_Caption:Show();
+
+local alignments = {
+    "TOPLEFT",
+    "TOP",
+    "TOPRIGHT",
+    "LEFT",
+    "CENTER",
+    "RIGHT",
+    "BOTTOMLEFT",
+    "BOTTOM",
+    "BOTTOMRIGHT"
+};
+
+for row = 1,3 do
+    for col = 1,3 do
+        local alignment = alignments[(row - 1) * 3 + col];
+
+        local cb = CreateFrame("CheckButton", "PositionSettings_Alignment_" .. alignment, settingsFrame, "UIRadioButtonTemplate");
+        cb:SetPoint("CENTER", PositionSettings_Alignment_Caption, "CENTER", (col - 2) * 150, row * -36 + 12);
+        cb.CheckValue = alignment;
+        cb:Show();
+
+        app.Settings.PositionSettings.Alignment["RadioButton_" .. alignment] = cb;
+
+        cb:SetScript("OnClick", function(self, button, down)
+            for i,a in ipairs(alignments) do
+                if a ~= self.CheckValue then
+                    app.Settings.PositionSettings.Alignment["RadioButton_" .. a]:SetChecked(false);
+                end
+
+            end
+
+            app.Settings:Set("General", "anchor", self.CheckValue);
+            app:UpdateFramePosition();
+        end);
+    end
+end
