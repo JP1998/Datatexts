@@ -105,7 +105,9 @@ app.colorString = function(str)
 end
 
 app.UpdateFramePosition = function(self)
-    app.Frame:SetPoint("TOPLEFT", UIParent, "TOPLEFT", app.Settings:Get("General", "offsetX"), -app.Settings:Get("General", "offsetY"));
+    local settings = app.Settings:Get("General");
+
+    app.Frame:SetPoint(settings.anchor, UIParent, settings.anchor, settings.offsetX, -settings.offsetY);
 end
 
 app:RegisterEvent("ADDON_LOADED", "Datatexts", function(addon)
