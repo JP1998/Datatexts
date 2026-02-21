@@ -76,6 +76,13 @@ settings.Initialize = function(self)
 
     app.Settings.PositionSettings.Alignment["RadioButton_" .. DatatextsSettings["General"]["anchor"]]:SetChecked(true);
 
+    app.Settings.TimeSettings.TwentyFourHourCheckbox:SetChecked(DatatextsSettings["Time"]["twentyFourHour"]);
+    app.Settings.TimeSettings.LocalTimeCheckbox:SetChecked(DatatextsSettings["Time"]["localTime"]);
+
+    app.Settings.SystemStatsSettings.WorldMSCheckbox:SetChecked(DatatextsSettings["SystemStats"]["worldMS"]);
+    app.Settings.SystemStatsSettings.ComboCheckbox:SetChecked(DatatextsSettings["SystemStats"]["combo"]);
+    app.Settings.SystemStatsSettings.FpsRefreshSlider:SetValue(DatatextsSettings["SystemStats"]["fpsRefresh"]);
+
     self.Frame:Refresh();
 
     initialized = true;
@@ -300,3 +307,105 @@ for row = 1,3 do
         end);
     end
 end
+
+
+app.Settings.TimeSettings = {};
+
+
+local Time_Label = settingsFrame:CreateFontString(nil, "ARTWORK", "GameFontWhite");
+Time_Label:SetPoint("LEFT", settingsFrame.title, "LEFT", 0, 0);
+Time_Label:SetPoint("TOP", app.Settings.PositionSettings.Alignment.RadioButton_BOTTOM, "BOTTOM", 0, -24);
+Time_Label:SetJustifyH("LEFT");
+Time_Label:SetTextColor(1, 0.82, 0, 1);
+Time_Label:SetText("Time");
+Time_Label:Show();
+
+local TimeSettings_TwentyFourHour_Checkbox = CreateFrame("CheckButton", "TimeSettings_TwentyFourHour_Checkbox", settingsFrame, "InterfaceOptionsCheckButtonTemplate");
+TimeSettings_TwentyFourHour_Checkbox:SetPoint("TOPLEFT", Time_Label, "BOTTOMLEFT", 0, -6);
+TimeSettings_TwentyFourHour_Checkbox.Text:SetText("Use 24h time formatting (also known as \"military time\").");
+TimeSettings_TwentyFourHour_Checkbox.Text:SetTextColor(1, 1, 1, 1);
+TimeSettings_TwentyFourHour_Checkbox:SetScript("OnClick", function(self, button, down)
+    app.Settings:Set("Time", "twentyFourHour", self:GetChecked());
+    app.Time.OnUpdate();
+end);
+TimeSettings_TwentyFourHour_Checkbox:Show();
+
+app.Settings.TimeSettings.TwentyFourHourCheckbox = TimeSettings_TwentyFourHour_Checkbox;
+
+local TimeSettings_LocalTime_Checkbox = CreateFrame("CheckButton", "TimeSettings_LocalTime_Checkbox", settingsFrame, "InterfaceOptionsCheckButtonTemplate");
+TimeSettings_LocalTime_Checkbox:SetPoint("TOPLEFT", TimeSettings_TwentyFourHour_Checkbox, "BOTTOMLEFT", 0, 0);
+TimeSettings_LocalTime_Checkbox.Text:SetText("Use local time. (Will use server time if not checked)");
+TimeSettings_LocalTime_Checkbox.Text:SetTextColor(1, 1, 1, 1);
+TimeSettings_LocalTime_Checkbox:SetScript("OnClick", function(self, button, down)
+    app.Settings:Set("Time", "localTime", self:GetChecked());
+    app.Time.OnUpdate();
+end);
+TimeSettings_LocalTime_Checkbox:Show();
+
+app.Settings.TimeSettings.LocalTimeCheckbox = TimeSettings_LocalTime_Checkbox;
+
+
+app.Settings.SystemStatsSettings = {};
+
+
+local SystemStats_Label = settingsFrame:CreateFontString(nil, "ARTWORK", "GameFontWhite");
+SystemStats_Label:SetPoint("TOPLEFT", TimeSettings_LocalTime_Checkbox, "BOTTOMLEFT", 0, -24);
+SystemStats_Label:SetJustifyH("LEFT");
+SystemStats_Label:SetTextColor(1, 0.82, 0, 1);
+SystemStats_Label:SetText("System Stats");
+SystemStats_Label:Show();
+
+local SystemStatsSettings_WorldMS_Checkbox = CreateFrame("CheckButton", "SystemStatsSettings_WorldMS_Checkbox", settingsFrame, "InterfaceOptionsCheckButtonTemplate");
+SystemStatsSettings_WorldMS_Checkbox:SetPoint("TOPLEFT", SystemStats_Label, "BOTTOMLEFT", 0, -6);
+SystemStatsSettings_WorldMS_Checkbox.Text:SetText("Display world ms as ping. (Will show home ping if not checked)");
+SystemStatsSettings_WorldMS_Checkbox.Text:SetTextColor(1, 1, 1, 1);
+SystemStatsSettings_WorldMS_Checkbox:SetScript("OnClick", function(self, button, down)
+    app.Settings:Set("SystemStats", "worldMS", self:GetChecked());
+    app.SystemStats.OnUpdate();
+end);
+SystemStatsSettings_WorldMS_Checkbox:Show();
+
+app.Settings.SystemStatsSettings.WorldMSCheckbox = SystemStatsSettings_WorldMS_Checkbox;
+
+local SystemStatsSettings_Combo_Checkbox = CreateFrame("CheckButton", "SystemStatsSettings_Combo_Checkbox", settingsFrame, "InterfaceOptionsCheckButtonTemplate");
+SystemStatsSettings_Combo_Checkbox:SetPoint("TOPLEFT", SystemStatsSettings_WorldMS_Checkbox, "BOTTOMLEFT", 0, 0);
+SystemStatsSettings_Combo_Checkbox.Text:SetText("Display both world and home ping.");
+SystemStatsSettings_Combo_Checkbox.Text:SetTextColor(1, 1, 1, 1);
+SystemStatsSettings_Combo_Checkbox:SetScript("OnClick", function(self, button, down)
+    app.Settings:Set("SystemStats", "combo", self:GetChecked());
+    app.SystemStats.OnUpdate();
+end);
+SystemStatsSettings_Combo_Checkbox:Show();
+
+app.Settings.SystemStatsSettings.ComboCheckbox = SystemStatsSettings_Combo_Checkbox;
+
+local SystemStatsSettings_FpsRefresh_Slider = CreateFrame("Slider", "Datatexts-Settings-SystemStatsSettings_FpsRefresh_Slider", settingsFrame, "MinimalSliderTemplate");
+
+SystemStatsSettings_FpsRefresh_Slider:SetPoint("TOPLEFT", SystemStatsSettings_Combo_Checkbox, "BOTTOMLEFT", 0, -18);
+SystemStatsSettings_FpsRefresh_Slider:SetPoint("RIGHT", settingsFrame, "RIGHT", -12, 0);
+SystemStatsSettings_FpsRefresh_Slider:SetHeight(17);
+SystemStatsSettings_FpsRefresh_Slider:SetMinMaxValues(0.1, 10);
+SystemStatsSettings_FpsRefresh_Slider:SetValueStep(0.1);
+SystemStatsSettings_FpsRefresh_Slider:SetObeyStepOnDrag(true);
+
+local SystemStatsSettings_FpsRefresh_Label = settingsFrame:CreateFontString(nil, "ARTWORK", "GameFontWhite");
+SystemStatsSettings_FpsRefresh_Label:SetPoint("CENTER", SystemStatsSettings_FpsRefresh_Slider, "CENTER", 0, 12);
+SystemStatsSettings_FpsRefresh_Label:SetJustifyH("LEFT");
+SystemStatsSettings_FpsRefresh_Label:SetText("System Stats Update Throttle (in seconds)");
+SystemStatsSettings_FpsRefresh_Label:Show();
+
+local SystemStatsSettings_FpsRefresh_ValueLabel = settingsFrame:CreateFontString(nil, "ARTWORK", "GameFontWhite");
+SystemStatsSettings_FpsRefresh_ValueLabel:SetPoint("TOPLEFT", SystemStatsSettings_FpsRefresh_Slider, "BOTTOMLEFT", 0, 0);
+SystemStatsSettings_FpsRefresh_ValueLabel:SetJustifyH("LEFT");
+SystemStatsSettings_FpsRefresh_ValueLabel:SetText("50");
+SystemStatsSettings_FpsRefresh_ValueLabel:Show();
+
+SystemStatsSettings_FpsRefresh_Slider:SetScript("OnValueChanged", function(self, value, userInput)
+    SystemStatsSettings_FpsRefresh_ValueLabel:SetText(("%.2fs"):format(value));
+
+    if userInput then
+        app.Settings:Set("SystemStats", "fpsRefresh", value);
+    end
+end)
+
+app.Settings.SystemStatsSettings.FpsRefreshSlider = SystemStatsSettings_FpsRefresh_Slider;
