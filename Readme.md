@@ -1,7 +1,11 @@
 
 # Datatexts
 
-TODO: Reference the original WeakAura
+This addon displays many useful things, like the current time, your loot spec or your equipped gears repair status. It originated from a quite practical WeakAura, which I got shared from a guild member. I was never able to track down the 100% original WeakAura because there are simply too many versions of this WeakAura floating around on Wago.
+
+That being said I want full disclosure that, even though I fixed some of the broken API calls when they were changed at the start of Shadowlands, I have copied much of the logic code from said WeakAura and is not actually authored by me.
+
+![](assets/Readme/Display-Screenshot.png)
 
 ## Installation
 
