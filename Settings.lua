@@ -183,9 +183,17 @@ settingsFrame.version = f;
 app.Settings.PositionSettings = {};
 
 
+local General_Label = settingsFrame:CreateFontString(nil, "ARTWORK", "GameFontWhite");
+General_Label:SetPoint("TOPLEFT", settingsFrame.title, "BOTTOMLEFT", 0, -24);
+General_Label:SetJustifyH("LEFT");
+General_Label:SetTextColor(1, 0.82, 0, 1);
+General_Label:SetText("General");
+General_Label:Show();
+
+
 local PositionSettings_XSlider = CreateFrame("Slider", "Datatexts-Settings-PositionSettings_XSlider", settingsFrame, "MinimalSliderTemplate");
 
-PositionSettings_XSlider:SetPoint("TOPLEFT", settingsFrame.title, "BOTTOMLEFT", 48, -24);
+PositionSettings_XSlider:SetPoint("TOPLEFT", General_Label, "BOTTOMLEFT", 48, -18);
 PositionSettings_XSlider:SetPoint("RIGHT", settingsFrame, "RIGHT", -12, 0);
 PositionSettings_XSlider:SetHeight(17);
 PositionSettings_XSlider:SetMinMaxValues(-1000, 1000);
@@ -285,7 +293,6 @@ for row = 1,3 do
                 if a ~= self.CheckValue then
                     app.Settings.PositionSettings.Alignment["RadioButton_" .. a]:SetChecked(false);
                 end
-
             end
 
             app.Settings:Set("General", "anchor", self.CheckValue);
