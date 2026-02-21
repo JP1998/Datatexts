@@ -193,7 +193,7 @@ General_Label:Show();
 
 local PositionSettings_XSlider = CreateFrame("Slider", "Datatexts-Settings-PositionSettings_XSlider", settingsFrame, "MinimalSliderTemplate");
 
-PositionSettings_XSlider:SetPoint("TOPLEFT", General_Label, "BOTTOMLEFT", 48, -18);
+PositionSettings_XSlider:SetPoint("TOPLEFT", General_Label, "BOTTOMLEFT", 0, -18);
 PositionSettings_XSlider:SetPoint("RIGHT", settingsFrame, "RIGHT", -12, 0);
 PositionSettings_XSlider:SetHeight(17);
 PositionSettings_XSlider:SetMinMaxValues(-1000, 1000);
@@ -201,7 +201,7 @@ PositionSettings_XSlider:SetValueStep(1);
 PositionSettings_XSlider:SetObeyStepOnDrag(true);
 
 local PositionSettings_XSlider_Label = settingsFrame:CreateFontString(nil, "ARTWORK", "GameFontWhite");
-PositionSettings_XSlider_Label:SetPoint("RIGHT", PositionSettings_XSlider, "LEFT", -2, 0);
+PositionSettings_XSlider_Label:SetPoint("CENTER", PositionSettings_XSlider, "CENTER", 0, 12);
 PositionSettings_XSlider_Label:SetJustifyH("LEFT");
 PositionSettings_XSlider_Label:SetText("X Offset");
 PositionSettings_XSlider_Label:Show();
@@ -225,7 +225,7 @@ app.Settings.PositionSettings.XSlider = PositionSettings_XSlider;
 
 local PositionSettings_YSlider = CreateFrame("Slider", "Datatexts-Settings-PositionSettings_YSlider", settingsFrame, "MinimalSliderTemplate");
 
-PositionSettings_YSlider:SetPoint("TOPLEFT", PositionSettings_XSlider, "BOTTOMLEFT", 0, -24);
+PositionSettings_YSlider:SetPoint("TOPLEFT", PositionSettings_XSlider, "BOTTOMLEFT", 0, -18);
 PositionSettings_YSlider:SetPoint("RIGHT", settingsFrame, "RIGHT", -12, 0);
 PositionSettings_YSlider:SetHeight(17);
 PositionSettings_YSlider:SetMinMaxValues(-1000, 1000);
@@ -233,7 +233,7 @@ PositionSettings_YSlider:SetValueStep(1);
 PositionSettings_YSlider:SetObeyStepOnDrag(true);
 
 local PositionSettings_YSlider_Label = settingsFrame:CreateFontString(nil, "ARTWORK", "GameFontWhite");
-PositionSettings_YSlider_Label:SetPoint("RIGHT", PositionSettings_YSlider, "LEFT", -2, 0);
+PositionSettings_YSlider_Label:SetPoint("CENTER", PositionSettings_YSlider, "CENTER", 0, 12);
 PositionSettings_YSlider_Label:SetJustifyH("LEFT");
 PositionSettings_YSlider_Label:SetText("Y Offset");
 PositionSettings_YSlider_Label:Show();
@@ -258,7 +258,7 @@ app.Settings.PositionSettings.YSlider = PositionSettings_YSlider;
 app.Settings.PositionSettings.Alignment = {};
 
 local PositionSettings_Alignment_Caption = settingsFrame:CreateFontString("PositionSettings_Alignment_Caption", "ARTWORK", "GameFontWhite");
-PositionSettings_Alignment_Caption:SetPoint("TOP", PositionSettings_YSlider, "BOTTOM", 0, -24);
+PositionSettings_Alignment_Caption:SetPoint("TOP", PositionSettings_YSlider, "BOTTOM", 0, -12);
 PositionSettings_Alignment_Caption:SetPoint("LEFT", settingsFrame, "LEFT", 0, 0);
 PositionSettings_Alignment_Caption:SetPoint("RIGHT", settingsFrame, "RIGHT", 0, 0);
 PositionSettings_Alignment_Caption:SetJustifyH("CENTER");
